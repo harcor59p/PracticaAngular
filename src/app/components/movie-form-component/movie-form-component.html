@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<h1>Reactive Forms </h1>
+
+<form [formGroup]="movieForm" (submit)="handleSubmit()">
+  <fieldset>
+    <label for="nameMovie">Nombre de la pelicula: </label>
+    <input type="text" formControlName="nameMovie">
+    @if (nameMovie.invalid && nameMovie.touched) {
+      <p class="form-error">El nombre de la pelicula es requerido</p>
+    }
+  </fieldset>
+  <fieldset>
+    <label for="yearMovie">Año de la pelicula: </label>
+    <input type="text" formControlName="yearMovie">
+    @if (yearMovie.hasError('required') && yearMovie.touched) {
+      <p class="form-error">El año de la pelicula es requerido</p>
+    }
+    @else if (yearMovie.hasError('min') && yearMovie.touched) {
+      <p class="form-error">El año de la pelicula debe ser mayor a 1900</p>
+    }
+    @else if (yearMovie.hasError('max') && yearMovie.touched) {
+      <p class="form-error">El año de la pelicula debe ser menor a 2025</p>
+    }
+  </fieldset>
+  <fieldset>
+    <label for="ratingMovie">Rating de la pelicula: </label>
+    <input type="text" formControlName="ratingMovie">
+  </fieldset>
+  <fieldset>  
+    <label for="duration">Duracion de la pelicula: </label>
+    <input type="text" formControlName="duration">
+  </fieldset>
+  <fieldset>
+    <label for="director">Director de la pelicula: </label>
+    <input type="text" formControlName="director">
+  </fieldset>
+  <button [disabled]="movieForm.invalid" type="submit">Crear Pelicula</button>
+  </form>
