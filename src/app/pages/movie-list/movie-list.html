@@ -4,3 +4,15 @@
     <h1>Movie List</h1>
 </main>
 
+<ul class="movie-list">
+    @for (movie of movieService.movies; track $index) {
+        <li class="movie-item">
+            <h2>{{movie.nameMovie}}</h2>
+            <h3>{{movie.yearMovie}}</h3>
+            <h3>{{movie.ratingMovie}}</h3>
+            <h3>{{movie.duration}}</h3>
+            <h3>{{movie.director}}</h3>
+        </li>
+    }
+</ul>
+

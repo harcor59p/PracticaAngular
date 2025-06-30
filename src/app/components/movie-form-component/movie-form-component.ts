@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Header } from '../header/header';
+import { MovieService } from '../../services/movie';
 
 @Component({
   selector: 'app-movie-form-component',
@@ -18,7 +19,7 @@ export class MovieFormComponent {
   duration: FormControl;
   director: FormControl;
 
-  constructor() {
+  constructor(public movieService: MovieService) {
     // Inicialización del formulario
     this.nameMovie = new FormControl('', Validators.required);
     this.yearMovie = new FormControl('', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]);
@@ -38,6 +39,7 @@ export class MovieFormComponent {
   }
   handleSubmit(): void {
     console.log(this.movieForm.value);
+    this.movieService.addMovie(this.movieForm.value);
     this.movieForm.reset();
   }
 
